@@ -1,7 +1,7 @@
 	.arch armv8-a
 	.text
 
-@ print function is complete, no modifications needed
+// print function is complete, no modifications needed
     .global	print
 print:
       stp    x29, x30, [sp, -16]! //Store FP, LR.
@@ -21,8 +21,20 @@ startstring:
 towers:
    /* Save calllee-saved registers to stack */
    
+    stp x29, x30, [sp, -48] // reserve 48 bytes for towers
+    // x29 contains stack pointer
+    str x19, [x29, 4] // number of disks
+    str x20, [x29, 8] // start
+    str x21, [x29, 12] // goal
+    str x22, [x29, 16] // peg
+    str x23, [x29, 20] // steps
+   
    /* Save a copy of all 3 incoming parameters to callee-saved registers */
-
+   
+   ldr x19, [x29, 4] // number of disks
+   ldr x20, [x29, 8] // start
+   ldr x21, [x29, 12] // goal
+ 
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
    /* Check if less than, else branch to else */
@@ -58,7 +70,7 @@ endif:
    /* Restore Registers */
    /* Return from towers function */
 
-@ Function main is complete, no modifications needed
+// Function main is complete, no modifications needed
     .global	main
 main:
       stp    x29, x30, [sp, -32]!
