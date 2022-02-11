@@ -51,10 +51,15 @@ if:
    /* branch to endif */
 else:
    /* Use a callee-saved varable for temp and set it to 6 */
+   str x24 6 /* temp is x24 */
    /* Subract start from temp and store to itself */
+   sub x24 x24 x20
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
-
+   sub x24 x24 x21
    /* subtract 1 from original numDisks and store it to numDisks parameter */
+   sub x19 x19 1
+
+   /* probably right */
 
    /* Set end parameter as temp */
    /* Call towers function */
