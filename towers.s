@@ -71,6 +71,7 @@ else:
    /* Add result to total steps so far */
 
    /* Set numDisks parameter to original numDisks - 1 */
+   
    /* set start parameter to temp */
    /* set goal parameter to original goal */
    /* Call towers function */
