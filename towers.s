@@ -20,30 +20,25 @@ startstring:
     .global	towers
 towers:
    /* Save calllee-saved registers to stack */
-
-    stp x29, x30, [sp, -48] // reserve 48 bytes for towers
-    // x29 contains stack pointer
+   
+    stp x29, x30, [sp, -64] // reserve 48 bytes for towers
+    add x29, sp, 0 // x29 contains stack pointer
     str x19, [x29, 4] // number of disks
     str x20, [x29, 8] // start
     str x21, [x29, 12] // goal
     str x22, [x29, 16] // peg
     str x23, [x29, 20] // steps
-
-   /* Save a copy of all 3 incoming parameters to callee-saved registers */
-
-   ldr x19, [x29, 4] // number of disks
-   ldr x20, [x29, 8] // start
-   ldr x21, [x29, 12] // goal
-
+   
+   // Save a copy of all 3 incoming parameters to callee-saved registers
+   
+   mov x19, x0 // number of disks
+   mov x20, x1 // start
+   mov x21, x2 // goal
+ 
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
    /* Check if less than, else branch to else */
-   /*compares the number of disks to 2*/
-   cmp x19 2
-   b.GE else
-   /*holy shit was figuring out a conditional jump bullshit the quick reference page was th only one at all useful */
-
-
+   
    /* set print function's start to incoming start */
    /* set print function's end to goal */
    /* call print function */
@@ -51,15 +46,10 @@ if:
    /* branch to endif */
 else:
    /* Use a callee-saved varable for temp and set it to 6 */
-   str x24 6 /* temp is x24 */
    /* Subract start from temp and store to itself */
-   sub x24 x24 x20
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
-   sub x24 x24 x21
-   /* subtract 1 from original numDisks and store it to numDisks parameter */
-   sub x19 x19 1
 
-   /* probably right */
+   /* subtract 1 from original numDisks and store it to numDisks parameter */
 
    /* Set end parameter as temp */
    /* Call towers function */
@@ -69,9 +59,8 @@ else:
    /* Set goal parameter to original goal */
    /* Call towers function */
    /* Add result to total steps so far */
-
-   /* Set numDisks parameter to original numDisks - 1 */
    
+   /* Set numDisks parameter to original numDisks - 1 */
    /* set start parameter to temp */
    /* set goal parameter to original goal */
    /* Call towers function */
@@ -79,14 +68,21 @@ else:
 
 endif:
    /* Restore Registers */
-   /* Return from towers function */
+  ldp x19, x20, [sp, 16]
+  ldp x21, x22, [sp, 32]
+  ldp x23, x24, [sp, 48]
+  ldp x29, x30, [sp], 64
+
+  /* Return from towers function */
+  ldp x29, x30, [sp], 64 //load FP and LR, get sp back
+  ret
 
 // Function main is complete, no modifications needed
     .global	main
 main:
       stp    x29, x30, [sp, -32]!
       add    x29, sp, 0
-      ldr    w0, printdata
+      ldr    w0, printdata 
       bl     printf
       ldr    w0, printdata + 4
       add    x1, x29, 28
