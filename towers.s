@@ -23,11 +23,11 @@ towers:
 
     stp x29, x30, [sp, -64] // reserve 48 bytes for towers
     add x29, sp, 0 // x29 contains stack pointer
-    str x19, [x29, 4] // number of disks
-    str x20, [x29, 8] // start
-    str x21, [x29, 12] // goal
-    str x22, [x29, 16] // peg
-    str x23, [x29, 20] // steps
+    str x19, [sp, 8] // number of disks
+    str x20, [sp, 16] // start
+    str x21, [sp, 24] // goal
+    str x22, [sp, 32] // peg/temp
+    str x23, [sp, 40] // steps
 
    // Save a copy of all 3 incoming parameters to callee-saved registers
 
@@ -54,27 +54,40 @@ if:
    b endif
 else:
    /* Use a callee-saved varable for temp and set it to 6 */
+    add x22, #6, 0
    /* Subract start from temp and store to itself */
+    sub x20, x20, x22
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
-
+    sub x21, x21, x22
    /* subtract 1 from original numDisks and store it to numDisks parameter */
-
+    sub x0, x19, #1
    /* Set end parameter as temp */
+   mov x2, x22
    /* Call towers function */
+   bl towers
    /* Save result to callee-saved register for total steps */
+   mov x23, x0
    /* Set numDiscs parameter to 1 */
+   add x0, 1, 0
    /* Set start parameter to original start */
+   mov x1, x20
    /* Set goal parameter to original goal */
+   mov x2, x21
    /* Call towers function */
+   bl towers
    /* Add result to total steps so far */
-
+   add x23, x0, x23
    /* Set numDisks parameter to original numDisks - 1 */
-
+   mov x0, x19
+   sub x0, x0, 1
    /* set start parameter to temp */
+   mov x1, x20
    /* set goal parameter to original goal */
+   mov x2, x21
    /* Call towers function */
+   bl towers
    /* Add result to total steps so far and save it to return register */
-
+   add x0, x0, x23
 endif:
    /* Restore Registers */
   ldp x19, x20, [sp, 16]
