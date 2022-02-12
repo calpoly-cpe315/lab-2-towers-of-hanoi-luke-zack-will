@@ -20,7 +20,7 @@ startstring:
     .global	towers
 towers:
    /* Save calllee-saved registers to stack */
-   
+
     stp x29, x30, [sp, -64] // reserve 48 bytes for towers
     add x29, sp, 0 // x29 contains stack pointer
     str x19, [x29, 4] // number of disks
@@ -28,17 +28,20 @@ towers:
     str x21, [x29, 12] // goal
     str x22, [x29, 16] // peg
     str x23, [x29, 20] // steps
-   
+
    // Save a copy of all 3 incoming parameters to callee-saved registers
-   
+
    mov x19, x0 // number of disks
    mov x20, x1 // start
    mov x21, x2 // goal
- 
+
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
    /* Check if less than, else branch to else */
-   
+
+   cmp x19 2
+   b.ge else
+
    /* set print function's start to incoming start */
    /* set print function's end to goal */
    /* call print function */
@@ -59,7 +62,7 @@ else:
    /* Set goal parameter to original goal */
    /* Call towers function */
    /* Add result to total steps so far */
-   
+
    /* Set numDisks parameter to original numDisks - 1 */
    /* set start parameter to temp */
    /* set goal parameter to original goal */
@@ -71,7 +74,6 @@ endif:
   ldp x19, x20, [sp, 16]
   ldp x21, x22, [sp, 32]
   ldp x23, x24, [sp, 48]
-  ldp x29, x30, [sp], 64
 
   /* Return from towers function */
   ldp x29, x30, [sp], 64 //load FP and LR, get sp back
@@ -82,7 +84,7 @@ endif:
 main:
       stp    x29, x30, [sp, -32]!
       add    x29, sp, 0
-      ldr    w0, printdata 
+      ldr    w0, printdata
       bl     printf
       ldr    w0, printdata + 4
       add    x1, x29, 28
