@@ -37,16 +37,21 @@ towers:
 
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
-   /* Check if less than, else branch to else */
-
    cmp x19 2
+   /* Check if less than, else branch to else */
    b.ge else
 
    /* set print function's start to incoming start */
+   mov x0, x20
    /* set print function's end to goal */
+   mov x1, x21
    /* call print function */
+   bl print
    /* Set return register to 1 */
+   add x0, 1, 0
+
    /* branch to endif */
+   b endif
 else:
    /* Use a callee-saved varable for temp and set it to 6 */
    /* Subract start from temp and store to itself */
@@ -64,6 +69,7 @@ else:
    /* Add result to total steps so far */
 
    /* Set numDisks parameter to original numDisks - 1 */
+
    /* set start parameter to temp */
    /* set goal parameter to original goal */
    /* Call towers function */
