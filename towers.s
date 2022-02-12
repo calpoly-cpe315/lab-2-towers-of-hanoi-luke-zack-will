@@ -71,7 +71,6 @@ endif:
   ldp x19, x20, [sp, 16]
   ldp x21, x22, [sp, 32]
   ldp x23, x24, [sp, 48]
-  ldp x29, x30, [sp], 64
 
   /* Return from towers function */
   ldp x29, x30, [sp], 64 //load FP and LR, get sp back
