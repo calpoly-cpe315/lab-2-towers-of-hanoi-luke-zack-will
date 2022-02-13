@@ -23,11 +23,11 @@ towers:
 
     stp x29, x30, [sp, -64] // reserve 48 bytes for towers
     add x29, sp, 0 // x29 contains stack pointer
-    str x19, [sp, 8] // number of disks
-    str x20, [sp, 16] // start
-    str x21, [sp, 24] // goal
-    str x22, [sp, 32] // peg/temp
-    str x23, [sp, 40] // steps
+    stp x19, x20, [sp, 16] //numdisks, start
+    stp x21, x22, [sp, 32] //goal, peg/temp
+    stp x23, x24, [sp, 48] //steps, ???
+
+
 
    // Save a copy of all 3 incoming parameters to callee-saved registers
 
