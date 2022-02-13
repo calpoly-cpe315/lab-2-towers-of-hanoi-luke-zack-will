@@ -62,7 +62,7 @@ else:
    /* subtract 1 from original numDisks and store it to numDisks parameter */
    sub x0, x19, #1
    /* Set end parameter as temp */
-   mov x22
+   mov x2, x22
    /* Call towers function */
    bl towers
    /* Save result to callee-saved register for total steps */
