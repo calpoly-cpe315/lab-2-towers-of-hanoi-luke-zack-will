@@ -24,8 +24,8 @@ towers:
     stp x29, x30, [sp, -64] // reserve 48 bytes for towers
     add x29, sp, 0 // x29 contains stack pointer
     stp x19, x20, [sp, 16] //numdisks, start
-    stp x21, x22, [sp, 32] //goal, peg/temp
-    stp x23, x24, [sp, 48] //steps, ???
+    stp x21, x22, [sp, 32] //goal, peg
+    stp x23, x24, [sp, 48] //steps, temp
 
 
 
