@@ -37,7 +37,7 @@ towers:
 
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
-   cmp x19 2
+   cmp x19, 2
    /* Check if less than, else branch to else */
    b.ge else
 
@@ -48,13 +48,15 @@ if:
    /* call print function */
    bl print
    /* Set return register to 1 */
-   add x0, 1, 0
+   sub x0, x0, 0
+   add x0, x0, 1
 
    /* branch to endif */
    b endif
 else:
    /* Use a callee-saved varable for temp and set it to 6 */
-    add x22, #6, 0
+    sub x22, x22, 0
+    add x22, x22, #6
    /* Subract start from temp and store to itself */
     sub x20, x20, x22
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
@@ -68,7 +70,8 @@ else:
    /* Save result to callee-saved register for total steps */
    mov x23, x0
    /* Set numDiscs parameter to 1 */
-   add x0, 1, 0
+   sub x0, x0, 0
+   add x0, x0, 1
    /* Set start parameter to original start */
    mov x1, x20
    /* Set goal parameter to original goal */
