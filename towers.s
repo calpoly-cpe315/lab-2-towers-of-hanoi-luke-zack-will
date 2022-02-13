@@ -56,13 +56,13 @@ else:
    /* Use a callee-saved varable for temp and set it to 6 */
    mov x22, #6
    /* Subract start from temp and store to itself */
-   sub x20, x20, x22
+   sub x22, x22, x20
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
-   sub x21, x21, x22
+   sub x22, x22, x21
    /* subtract 1 from original numDisks and store it to numDisks parameter */
    sub x0, x19, #1
    /* Set end parameter as temp */
-   mov x2, x22
+   mov x22
    /* Call towers function */
    bl towers
    /* Save result to callee-saved register for total steps */
@@ -81,7 +81,7 @@ else:
    mov x0, x19
    sub x0, x0, #1
    /* set start parameter to temp */
-   mov x1, x20
+   mov x1, x22
    /* set goal parameter to original goal */
    mov x2, x21
    /* Call towers function */
