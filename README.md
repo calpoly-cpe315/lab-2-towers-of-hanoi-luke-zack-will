@@ -4,7 +4,7 @@ Towers of Hanoi
 Add your name and project status here.
 Zack Soucek - Luke Rowe - William Woodward
 
-Status: Calamitous
+Status: Completed; sucessful
 
 The ``towers.s`` file is what you will modifiy. There are comments
 to guide your implementation.
