@@ -21,7 +21,7 @@ startstring:
 towers:
    /* Save calllee-saved registers to stack */
 
-    stp x29, x30, [sp, -64] // reserve 48 bytes for towers
+    stp x29, x30, [sp, -64]! // reserve 48 bytes for towers
     add x29, sp, 0 // x29 contains stack pointer
     stp x19, x20, [sp, 16] //numdisks, start
     stp x21, x22, [sp, 32] //goal, peg
@@ -68,7 +68,7 @@ else:
    /* Save result to callee-saved register for total steps */
    mov x23, x0
    /* Set numDiscs parameter to 1 */
-   mov x19, #1
+   mov x0, #1
    /* Set start parameter to original start */
    mov x1, x20
    /* Set goal parameter to original goal */
@@ -86,7 +86,7 @@ else:
    /* Call towers function */
    bl towers
    /* Add result to total steps so far and save it to return register */
-   add x0, x0, x23
+   add x0, x23, x0
 endif:
    /* Restore Registers */
   ldp x19, x20, [sp, 16]
