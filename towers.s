@@ -76,10 +76,9 @@ else:
    /* Call towers function */
    bl towers
    /* Add result to total steps so far */
-   add x23, x0, x23
+   add x23, x23, x0
    /* Set numDisks parameter to original numDisks - 1 */
-   mov x0, x19
-   sub x0, x0, #1
+   sub x0, x19, #1
    /* set start parameter to temp */
    mov x1, x22
    /* set goal parameter to original goal */
