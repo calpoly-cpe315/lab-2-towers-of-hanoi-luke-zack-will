@@ -1,8 +1,7 @@
 # CPE 315 Lab 2 Towers of Hanoi
 Towers of Hanoi
 
-Add your name and project status here.
-Zack Soucek - Luke Rowe - William Woodward
+Names: Zack Soucek. Luke Rowe, William Woodward
 
 Status: Completed; sucessful
 
